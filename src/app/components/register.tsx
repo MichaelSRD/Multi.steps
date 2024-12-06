@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 
 
-export function Register( { paso}:any ){
+export function Register( paso:any ){
 
   const [formData, setFormData]= useState({
     name: '',

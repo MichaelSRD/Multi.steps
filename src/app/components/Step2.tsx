@@ -2,7 +2,7 @@ import Form from "next/form";
 import { useEffect, useState } from "react";
 
 
-export function Step2({ paso }:any){
+export function Step2(paso: any ){
     const [selectedTopics, setSelectedTopics] = useState<string[]>(() => {
         if (typeof window !== 'undefined') {
           const storedTopics = localStorage.getItem('selectedTopics');

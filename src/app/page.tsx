@@ -24,11 +24,6 @@ export default function Home() {
     {step: <Step2 paso={nextStep} />},
     {step: <Step3/>},
   ]
-  const anterior = ()=>{
-     if(pasoActual > 0){
-      setPasoActual(pasoActual -1)
-     }
-  }
  
   return (
     <>
