@@ -2,7 +2,11 @@ import Form from "next/form";
 import { useEffect, useState } from "react";
 
 
-export function Step2(paso: any ){
+interface ChildComponentProps {
+    paso: () => void; // Esta es la función que recibiremos como prop
+  }
+
+export function Step2({paso}:ChildComponentProps){
     const [selectedTopics, setSelectedTopics] = useState<string[]>(() => {
         if (typeof window !== 'undefined') {
           const storedTopics = localStorage.getItem('selectedTopics');
