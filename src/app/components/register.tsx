@@ -2,9 +2,11 @@
 import Form from 'next/form'
 import { useEffect, useState } from 'react';
 
+interface ChildComponentProps {
+  paso: () => void; // Esta es la función que recibiremos como prop
+}
 
-
-export function Register( paso:any ){
+export function Register( {paso}:ChildComponentProps ){
 
   const [formData, setFormData]= useState({
     name: '',
