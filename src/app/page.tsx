@@ -1,101 +1,60 @@
+
+'use client'
 import Image from "next/image";
+import { Register } from "./components/register";
+import { Step2 } from "./components/Step2";
+import { Step3 } from "./components/step3";
+import { useState } from "react";
+
+
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [pasoActual, setPasoActual] = useState(0);
+  
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  
+  const nextStep = ()=>{
+    if(pasoActual < steps.length -1){
+      setPasoActual(pasoActual  + 1)
+     
+    }
+  }
+  const steps = [
+    {step: <Register paso={nextStep}  /> },
+    {step: <Step2 paso={nextStep} />},
+    {step: <Step3/>},
+  ]
+  const anterior = ()=>{
+     if(pasoActual > 0){
+      setPasoActual(pasoActual -1)
+     }
+  }
+ 
+  return (
+    <>
+    <div className=" -z-10 absolute left-0 top-0 w-[638px]  h-[638px] overflow-hidden ">
+      <Image src={'blur-radial.svg'} alt="" width={1200} height={900} className=" absolute left-[-280px] top-[-280px] " />
     </div>
+    <div className="  -z-10 absolute right-0 bottom-0 w-[638px]  h-[638px] overflow-hidden   ">
+      <Image src={'blur-radial.svg'} alt="" width={1200} height={900} className=" absolute right-[-280px] bottom-[-280px] "/>
+    </div>
+    <div className=" ">
+      <main className="flex justify-center items-center m-auto h-screen flex-col ">
+        <div className="bg-[#4D5562] p-9 rounded-lg  bg-opacity-25 text-white border border-[#A1A1A9] w-[458px] ">
+        {steps[pasoActual].step}
+        </div>
+       <div className="text-[#4D5562] mt-6 flex space-x-5 items-center">
+        <p>Step {pasoActual +1} of  {steps.length}</p>
+        <div className={`w-3 h-3 bg-[#4D5562] rounded-full cursor-pointer ${pasoActual === 0 ? ' bg-[#845EEE] shadow-[0px_0px_0px_6px_rgba(132,_94,_238,_0.3)] ':' bg-[#845EEE]' }`} onClick={ pasoActual <= 0 ? ()=>{} : ()=>setPasoActual(0) }  ></div>
+
+
+        <div className={`w-3 h-3 bg-[#4D5562] rounded-full cursor-pointer ${pasoActual === 1 ? ' bg-[#845EEE] shadow-[0px_0px_0px_6px_rgba(132,_94,_238,_0.3)] ':'' } ${pasoActual < 1 ? 'bg-[#4D5562]':''} ${pasoActual > 1 ? 'bg-[#845EEE]' : ''}  `} onClick={ pasoActual <= 1 ? ()=>{} : ()=>setPasoActual(1) }  ></div>
+
+
+        <div className={`w-3 h-3 bg-[#4D5562] rounded-full cursor-pointer ${pasoActual === 2 ? ' bg-[#845EEE] shadow-[0px_0px_0px_6px_rgba(132,_94,_238,_0.3)] ':'' } ${pasoActual < 2 ? 'bg-[#4D5562]':''} ${pasoActual > 2 ? 'bg-[#845EEE]' : ''}  `} onClick={ pasoActual <= 2 ? ()=>{} : ()=>setPasoActual(2) }  ></div>
+       </div>
+      </main>
+    </div>
+    </>
   );
 }
